@@ -19,7 +19,7 @@ on:
         required: false
         default: "all"
   schedule:
-    - cron: 0 0 * * *
+    - cron: 12 0 * * *
 
 jobs:
   Config:
