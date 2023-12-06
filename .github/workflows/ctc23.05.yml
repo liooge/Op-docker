@@ -109,6 +109,7 @@ jobs:
 
     - name: Show config
       run: |
+        cp -rfv Dockerfile_p2 Dockerfile
         cd openwrt
         #cat 
         grep -v '^#' .config
