@@ -111,6 +111,7 @@ jobs:
       run: |
         cp -rfv Dockerfile_p2 Dockerfile
         cat Dockerfile
+        ls -la
         cp -rfv ctc_23.05.config openwrt/.config
 
         cd openwrt
