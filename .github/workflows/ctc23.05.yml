@@ -109,10 +109,11 @@ jobs:
 
     - name: Show config
       run: |
-        cp -rfv Dockerfile_p2 Dockerfile
         cd openwrt
+        cp -rfv Dockerfile_p2 Dockerfile
         #cat 
         grep -v '^#' .config
+        cp -rfv ctc_23.05.config .config
     - name: Download package
       working-directory: ./openwrt
       run: |

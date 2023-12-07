@@ -103,6 +103,7 @@ jobs:
           export DOCKER_EXTERA_TAG=$(echo ${{ matrix.TARGETS }} | awk -F '/' '{print $5}')
           echo "DOCKER_EXTERA_TAG=$DOCKER_EXTERA_TAG" >> $GITHUB_ENV
           cp -rfv Dockerfile_p1 Dockerfile
+          cat Dockerfile
 
       - name: Download Image Builder
         run: |
