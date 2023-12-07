@@ -115,6 +115,7 @@ jobs:
         cp -rfv ctc_23.05 openwrt/.config
 
         cd openwrt
+        make defconfig
         #cat 
         grep -v '^#' .config
     - name: Download package
