@@ -149,7 +149,8 @@ jobs:
       working-directory: ./openwrt
       run: |
           ls -la 
-          tree 
+          tree ./bin
+          tree /mnt/openwrt/bin
 
     - name: Upload bin directory
       uses: actions/upload-artifact@main
