@@ -28,11 +28,14 @@ jobs:
     runs-on: ubuntu-22.04   
     if: ${{ github.event.repository.owner.id == github.event.sender.id }}
 
-    name: Build ${{ matrix.target }}
+    name: Build Ubuntu-ffmpeg
     strategy:
       fail-fast: false
-      matrix:
-        target: [ctc_23.05]
+    #name: Build ${{ matrix.target }}
+    #strategy:
+    #  fail-fast: false
+    #  matrix:
+    #    target: [ctc_23.05]
 
     steps:
       - name: Checkout
