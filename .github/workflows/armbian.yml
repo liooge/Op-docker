@@ -50,11 +50,6 @@ jobs:
         VERSION="$(echo "${{github.event.action}}" | grep -Eo " [0-9.]+" | sed -e 's/ //')" || true
         [ "$VERSION" ] && echo "VERSION=$VERSION" >> $GITHUB_ENV || echo "VERSION=$(date +'%m.%d')" >> $GITHUB_ENV        
 
-    - name: Log files
-      working-directory: ./openwrt
-      run: |
-          ls -la 
-          tree 
         
     - name: Set Up Docker Buildx
       uses: docker/setup-buildx-action@master
