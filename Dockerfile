@@ -75,8 +75,9 @@ RUN mkdir /ffmpeg_sources && \
     make -j$(nproc) && \
     make install && \
     make clean && \
-    hash -r && \
-    git clone --recursive https://github.com/kornelski/pngquant.git && \
+    hash -r 
+
+RUN git clone --recursive https://github.com/kornelski/pngquant.git && \
     cd pngquant && \
     cargo build --release && \
     cp target/release/pngquant /usr/local/bin/pngquant && \
