@@ -1,0 +1,90 @@
+#=================================================
+# Description: Build OpenWrt using GitHub Actions
+# Lisence: MIT
+# Author: kenzo
+#=================================================
+
+name: ubuntu-ffmpeg
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'ssh'
+        required: false
+        default: 'false'
+    
+env:
+  UPLOAD_BIN_DIR: true
+  UPLOAD_FIRMWARE: true
+  UPLOAD_COWTRANSFER: true
+  UPLOAD_RELEASE: true
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  DOCKERHUB_PWD: ${{ secrets.DOCKERHUB_PWD }}  
+  TZ: Asia/Shanghai
+    
+jobs:
+  build:
+    runs-on: Ubuntu-22.04   
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    name: Build ${{matrix.target}}
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [ctc_23.05]
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@main
+  
+
+    - name: Get current date
+      id: date
+      run: |
+        echo "date=$(date +'%m/%d_%Y_%H/%M')" >> $GITHUB_ENV
+        echo "date2=$(date +'%Y/%m %d')" >> $GITHUB_ENV
+        echo "date3=$(date +'%m.%d')" >> $GITHUB_ENV
+        echo "DOCKERTAG=${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-ffmpeg:latest" >> $GITHUB_ENV
+        VERSION="$(echo "${{github.event.action}}" | grep -Eo " [0-9.]+" | sed -e 's/ //')" || true
+        [ "$VERSION" ] && echo "VERSION=$VERSION" >> $GITHUB_ENV || echo "VERSION=$(date +'%m.%d')" >> $GITHUB_ENV        
+
+    - name: Log files
+      working-directory: ./openwrt
+      run: |
+          ls -la 
+          tree 
+        
+    - name: Set Up Docker Buildx
+      uses: docker/setup-buildx-action@master
+      if: env.DOCKERHUB_USERNAME && env.DOCKERHUB_PWD
+
+    - name: Login To DockerHub
+      uses: docker/login-action@master
+      if: env.DOCKERHUB_USERNAME && env.DOCKERHUB_PWD
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PWD }}
+        
+    - name: Build and push docker image
+      uses: docker/build-push-action@master
+      continue-on-error: true
+      if: env.DOCKERHUB_USERNAME && env.DOCKERHUB_PWD && ! contains(github.event.action, 'noser')
+      with:
+        platforms: arm64
+        file: Dockerfile
+        context: .
+        push: true
+        tags: |
+          ${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-ffmpeg:latest"
+          ${{ env.DOCKERTAG }}         
+
+
+    - name: Delete workflow runs
+      uses: Mattraks/delete-workflow-runs@main
+      with:
+        retain_days: 1
+        keep_minimum_runs: 0
+
+        
