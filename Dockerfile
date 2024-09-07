@@ -63,11 +63,7 @@ RUN apt-get update && apt-get install -y \
     libiec61883-dev \
     frei0r-plugins-dev \
     libopencv-dev \
-    libchromaprint-dev
-
-
-# 安装 Rust 和 Cargo
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+    libchromaprint-dev && curl https://sh.rustup.rs -sSf | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 # 编译安装 ffmpeg
@@ -79,20 +75,13 @@ RUN mkdir /ffmpeg_sources && \
     make -j$(nproc) && \
     make install && \
     make clean && \
-    hash -r
-
-# 安装 pngquant 并使用 cargo build
-RUN git clone --recursive https://github.com/kornelski/pngquant.git && \
+    hash -r && \
+    git clone --recursive https://github.com/kornelski/pngquant.git && \
     cd pngquant && \
     cargo build --release && \
     cp target/release/pngquant /usr/local/bin/pngquant && \
     cd .. && \
-    rm -rf pngquant
-
-
-
-# 清理不必要的文件
-RUN apt-get clean && \
+    rm -rf pngquant &&\ apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # 设置工作目录
