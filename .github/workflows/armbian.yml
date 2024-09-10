@@ -93,8 +93,4 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-ffmpeg:latest
             ${{ env.DOCKERTAG }}
 
-      - name: Delete workflow runs
-        uses: Mattraks/delete-workflow-runs@v1
-        with:
-          retain_days: 1
-          keep_minimum_runs: 0
+
