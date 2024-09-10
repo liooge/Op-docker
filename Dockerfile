@@ -118,7 +118,7 @@ RUN mkdir /ffmpeg_sources && \
 
 RUN git clone --recursive https://github.com/kornelski/pngquant.git && \
     cd pngquant && \
-    cargo build --release && \
+    RUSTFLAGS="-C target-feature=+crt-static" cargo build --release && \
     cp target/release/pngquant /usr/local/bin/pngquant && \
     cd .. && \
     rm -rf pngquant && apt-get clean && \
@@ -126,7 +126,7 @@ RUN git clone --recursive https://github.com/kornelski/pngquant.git && \
 
 RUN git clone --recursive https://github.com/sayanarijit/xplr.git && \
     cd xplr && \
-    cargo build --release && \
+    RUSTFLAGS="-C target-feature=+crt-static" cargo build --release && \
     cp target/release/xplr /usr/local/bin/xplr && \
     cd .. && \
     rm -rf xplr && apt-get clean && \
@@ -134,7 +134,7 @@ RUN git clone --recursive https://github.com/sayanarijit/xplr.git && \
 
 RUN git clone --recursive https://github.com/Chleba/netscanner.git && \
     cd netscanner && \
-    cargo build --release && \
+    RUSTFLAGS="-C target-feature=+crt-static" cargo build --release && \
     cp target/release/netscanner /usr/local/bin/netscanner && \
     cd .. && \
     rm -rf netscanner && apt-get clean && \
@@ -142,7 +142,7 @@ RUN git clone --recursive https://github.com/Chleba/netscanner.git && \
 
 RUN git clone --recursive https://github.com/imsnif/bandwhich.git && \
     cd bandwhich && \
-    cargo build --release && \
+    RUSTFLAGS="-C target-feature=+crt-static" cargo build --release && \
     cp target/release/bandwhich /usr/local/bin/bandwhich && \
     cd .. && \
     rm -rf bandwhich && apt-get clean && \
