@@ -75,38 +75,13 @@ RUN mkdir /ffmpeg_sources && \
     make -j$(nproc) && \
     make install && \
     make clean && \
-    hash -r 
-
-RUN git clone --recursive https://github.com/kornelski/pngquant.git && \
+    hash -r && \
+    git clone --recursive https://github.com/kornelski/pngquant.git && \
     cd pngquant && \
     cargo build --release && \
     cp target/release/pngquant /usr/local/bin/pngquant && \
     cd .. && \
     rm -rf pngquant &&\ apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN git clone --recursive  https://github.com/sayanarijit/xplr.git && \
-    cd xplr && sed -i 's/-rdynamic/-static/g' .cargo/config && \
-    cargo build --release && \
-    cp target/release/xplr /usr/local/bin/xplr && \
-    cd .. && \
-    rm -rf xplr &&\ apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN git clone --recursive   https://github.com/Chleba/netscanner.git && \
-    cd netscanner && sed -i 's/-rdynamic/-static/g' .cargo/config && \
-    cargo build --release && \
-    cp target/release/netscanner /usr/local/bin/netscanner && \
-    cd .. && \
-    rm -rf netscanner &&\ apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-    
-RUN git clone --recursive  https://github.com/imsnif/bandwhich.git && \
-    cd bandwhich && sed -i 's/-rdynamic/-static/g' .cargo/config && \
-    cargo build --release && \
-    cp target/release/bandwhich /usr/local/bin/bandwhich && \
-    cd .. && \
-    rm -rf bandwhich &&\ apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # 设置工作目录
