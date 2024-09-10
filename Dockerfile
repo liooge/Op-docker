@@ -5,7 +5,7 @@ FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 # 更新包列表并安装必要的依赖
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common \
     wget \
     build-essential \
@@ -67,7 +67,8 @@ RUN apt-get update && apt-get install -y \
     libaom-dev \
     libdav1d-dev \
     libsvtav1-dev \
-    && curl https://sh.rustup.rs -sSf | sh -s  -y
+    && curl https://sh.rustup.rs -sSf | sh -s  -y && \
+    source $HOME/.cargo/env && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # 设置环境变量
 ENV PATH="/root/.cargo/bin:${PATH}"
@@ -129,24 +130,24 @@ RUN git clone --recursive https://github.com/kornelski/pngquant.git && \
     rm -rf pngquant && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN git clone --recursive  https://github.com/sayanarijit/xplr.git && \
-    cd xplr && sed -i 's/-rdynamic/-static/g' .cargo/config && \
+RUN git clone --recursive https://github.com/sayanarijit/xplr.git && \
+    cd xplr && \
     cargo build --release && \
     cp target/release/xplr /usr/local/bin/xplr && \
     cd .. && \
     rm -rf xplr && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN git clone --recursive   https://github.com/Chleba/netscanner.git && \
-    cd netscanner && sed -i 's/-rdynamic/-static/g' .cargo/config && \
+RUN git clone --recursive https://github.com/Chleba/netscanner.git && \
+    cd netscanner && \
     cargo build --release && \
     cp target/release/netscanner /usr/local/bin/netscanner && \
     cd .. && \
     rm -rf netscanner && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-    
-RUN git clone --recursive  https://github.com/imsnif/bandwhich.git && \
-    cd bandwhich && sed -i 's/-rdynamic/-static/g' .cargo/config && \
+
+RUN git clone --recursive https://github.com/imsnif/bandwhich.git && \
+    cd bandwhich && \
     cargo build --release && \
     cp target/release/bandwhich /usr/local/bin/bandwhich && \
     cd .. && \
