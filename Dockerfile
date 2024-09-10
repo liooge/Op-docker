@@ -65,8 +65,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libopencv-dev \
     libchromaprint-dev \
     libaom-dev \
-    && curl https://sh.rustup.rs -sSf | sh -s  -y && \
-    source $HOME/.cargo/env && apt-get clean && rm -rf /var/lib/apt/lists/*
+     && apt-get clean && rm -rf /var/lib/apt/lists/*
+     
+RUN curl https://sh.rustup.rs -sSf | sh -s  -y && source $HOME/.cargo/env 
 
 # 设置环境变量
 ENV PATH="/root/.cargo/bin:${PATH}"
