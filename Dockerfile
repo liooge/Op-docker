@@ -84,6 +84,50 @@ RUN mkdir /ffmpeg_sources && \
     rm -rf pngquant &&\ apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+
+# 编译安装 ffmpeg
+RUN mkdir /ffmpeg_sources && \
+    cd /ffmpeg_sources && \
+    git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg && \
+    cd ffmpeg && \
+    ./configure --enable-gpl --enable-libx264 --enable-libx265 --enable-libvpx --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libass --enable-libfreetype --enable-nonfree --disable-stripping  --enable-gnutls --enable-libbluray --enable-libfontconfig --enable-libfribidi --enable-libgme --enable-libgsm --enable-libopenjpeg --enable-libopenmpt --enable-libpulse --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libwebp --enable-libxvid --enable-libzmq --enable-libzvbi  --enable-sdl2  && \
+    make -j$(nproc) && \
+    make install && \
+    make clean && \
+    hash -r 
+
+RUN git clone --recursive https://github.com/kornelski/pngquant.git && \
+    cd pngquant && \
+    cargo build --release && \
+    cp target/release/pngquant /usr/local/bin/pngquant && \
+    cd .. && \
+    rm -rf pngquant &&\ apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN git clone --recursive  https://github.com/sayanarijit/xplr.git && \
+    cd xplr && sed -i 's/-rdynamic/-static/g' .cargo/config && \
+    cargo build --release && \
+    cp target/release/xplr /usr/local/bin/xplr && \
+    cd .. && \
+    rm -rf xplr &&\ apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN git clone --recursive   https://github.com/Chleba/netscanner.git && \
+    cd netscanner && sed -i 's/-rdynamic/-static/g' .cargo/config && \
+    cargo build --release && \
+    cp target/release/netscanner /usr/local/bin/netscanner && \
+    cd .. && \
+    rm -rf netscanner &&\ apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+    
+RUN git clone --recursive  https://github.com/imsnif/bandwhich.git && \
+    cd bandwhich && sed -i 's/-rdynamic/-static/g' .cargo/config && \
+    cargo build --release && \
+    cp target/release/bandwhich /usr/local/bin/bandwhich && \
+    cd .. && \
+    rm -rf bandwhich &&\ apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # 设置工作目录
 WORKDIR /workspace
 
