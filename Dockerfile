@@ -112,7 +112,6 @@ RUN mkdir /ffmpeg_sources && \
     --enable-libzvbi \
     --enable-sdl2 \
     --enable-libaom \
-    --enable-libchromaprint \
     && make -j$(nproc) && \
     make install && \
     make clean && \
