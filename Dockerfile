@@ -116,6 +116,8 @@ RUN mkdir /ffmpeg_sources && \
     make clean && \
     hash -r
 
+ENV RUSTFLAGS="-C target-feature=+crt-static"
+
 RUN git clone --recursive https://github.com/kornelski/pngquant.git && \
     cd pngquant && \
     RUSTFLAGS="-C target-feature=+crt-static" cargo build --release && \
