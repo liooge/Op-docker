@@ -111,7 +111,6 @@ RUN mkdir /ffmpeg_sources && \
     --enable-libzmq \
     --enable-libzvbi \
     --enable-sdl2 \
-    --enable-libaom \
     && make -j$(nproc) && \
     make install && \
     make clean && \
