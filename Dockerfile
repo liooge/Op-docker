@@ -126,7 +126,7 @@ RUN git clone --recursive https://github.com/kornelski/pngquant.git && \
     cargo build --release && \
     cp target/release/pngquant /usr/local/bin/pngquant && \
     cd .. && \
-    rm -rf pngquant &&\ apt-get clean && \
+    rm -rf pngquant && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 RUN git clone --recursive  https://github.com/sayanarijit/xplr.git && \
@@ -134,7 +134,7 @@ RUN git clone --recursive  https://github.com/sayanarijit/xplr.git && \
     cargo build --release && \
     cp target/release/xplr /usr/local/bin/xplr && \
     cd .. && \
-    rm -rf xplr &&\ apt-get clean && \
+    rm -rf xplr && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 RUN git clone --recursive   https://github.com/Chleba/netscanner.git && \
@@ -142,7 +142,7 @@ RUN git clone --recursive   https://github.com/Chleba/netscanner.git && \
     cargo build --release && \
     cp target/release/netscanner /usr/local/bin/netscanner && \
     cd .. && \
-    rm -rf netscanner &&\ apt-get clean && \
+    rm -rf netscanner && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
     
 RUN git clone --recursive  https://github.com/imsnif/bandwhich.git && \
@@ -150,7 +150,7 @@ RUN git clone --recursive  https://github.com/imsnif/bandwhich.git && \
     cargo build --release && \
     cp target/release/bandwhich /usr/local/bin/bandwhich && \
     cd .. && \
-    rm -rf bandwhich &&\ apt-get clean && \
+    rm -rf bandwhich && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # 设置工作目录
