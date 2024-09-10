@@ -67,7 +67,7 @@ RUN apt-get update && apt-get install -y \
     libaom-dev \
     libdav1d-dev \
     libsvtav1-dev \
-    && curl https://sh.rustup.rs -sSf | sh -s -- -y
+    && curl https://sh.rustup.rs -sSf | sh -s  -y
 
 # 设置环境变量
 ENV PATH="/root/.cargo/bin:${PATH}"
