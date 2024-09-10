@@ -75,25 +75,6 @@ RUN mkdir /ffmpeg_sources && \
     make -j$(nproc) && \
     make install && \
     make clean && \
-    hash -r && \
-    git clone --recursive https://github.com/kornelski/pngquant.git && \
-    cd pngquant && \
-    cargo build --release && \
-    cp target/release/pngquant /usr/local/bin/pngquant && \
-    cd .. && \
-    rm -rf pngquant &&\ apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-
-# 编译安装 ffmpeg
-RUN mkdir /ffmpeg_sources && \
-    cd /ffmpeg_sources && \
-    git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg && \
-    cd ffmpeg && \
-    ./configure --enable-gpl --enable-libx264 --enable-libx265 --enable-libvpx --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libass --enable-libfreetype --enable-nonfree --disable-stripping  --enable-gnutls --enable-libbluray --enable-libfontconfig --enable-libfribidi --enable-libgme --enable-libgsm --enable-libopenjpeg --enable-libopenmpt --enable-libpulse --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libwebp --enable-libxvid --enable-libzmq --enable-libzvbi  --enable-sdl2  && \
-    make -j$(nproc) && \
-    make install && \
-    make clean && \
     hash -r 
 
 RUN git clone --recursive https://github.com/kornelski/pngquant.git && \
