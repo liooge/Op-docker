@@ -65,8 +65,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libopencv-dev \
     libchromaprint-dev \
     libaom-dev \
-    libdav1d-dev \
-    libsvtav1-dev \
     && curl https://sh.rustup.rs -sSf | sh -s  -y && \
     source $HOME/.cargo/env && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -113,8 +111,6 @@ RUN mkdir /ffmpeg_sources && \
     --enable-libzmq \
     --enable-libzvbi \
     --enable-sdl2 \
-    --enable-libdav1d \
-    --enable-libsvtav1 \
     --enable-libaom \
     --enable-libchromaprint \
     && make -j$(nproc) && \
