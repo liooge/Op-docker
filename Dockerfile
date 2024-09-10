@@ -100,8 +100,6 @@ RUN git clone --recursive   https://github.com/Chleba/netscanner.git && \
     cd .. && \
     rm -rf netscanner &&\ apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-
     
 RUN git clone --recursive  https://github.com/imsnif/bandwhich.git && \
     cd bandwhich && sed -i 's/-rdynamic/-static/g' .cargo/config && \
