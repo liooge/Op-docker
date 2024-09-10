@@ -67,10 +67,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libaom-dev \
      && apt-get clean && rm -rf /var/lib/apt/lists/*
      
-RUN curl https://sh.rustup.rs -sSf | sh -s  -y && source $HOME/.cargo/env 
-
-# 设置环境变量
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
+
 
 # 编译安装 FFmpeg
 RUN mkdir /ffmpeg_sources && \
