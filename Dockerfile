@@ -115,13 +115,12 @@ RUN mkdir /ffmpeg_sources && \
     make install && \
     make clean && \
     hash -r
-
 ENV RUSTFLAGS="-C target-feature=+crt-static"
 
 RUN git clone --recursive https://github.com/kornelski/pngquant.git && \
     cd pngquant && \
     RUSTFLAGS="-C target-feature=+crt-static" cargo build --release --target aarch64-unknown-linux-gnu && \
-    cp target/release/pngquant /usr/local/bin/pngquant && \
+    cp target/aarch64-unknown-linux-gnu/release/pngquant /usr/local/bin/pngquant && \
     cd .. && \
     rm -rf pngquant && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -129,7 +128,7 @@ RUN git clone --recursive https://github.com/kornelski/pngquant.git && \
 RUN git clone --recursive https://github.com/sayanarijit/xplr.git && \
     cd xplr && \
     RUSTFLAGS="-C target-feature=+crt-static" cargo build --release --target aarch64-unknown-linux-gnu && \
-    cp target/release/xplr /usr/local/bin/xplr && \
+    cp target/aarch64-unknown-linux-gnu/release/xplr /usr/local/bin/xplr && \
     cd .. && \
     rm -rf xplr && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -137,7 +136,7 @@ RUN git clone --recursive https://github.com/sayanarijit/xplr.git && \
 RUN git clone --recursive https://github.com/Chleba/netscanner.git && \
     cd netscanner && \
     RUSTFLAGS="-C target-feature=+crt-static" cargo build --release --target aarch64-unknown-linux-gnu && \
-    cp target/release/netscanner /usr/local/bin/netscanner && \
+    cp target/aarch64-unknown-linux-gnu/release/netscanner /usr/local/bin/netscanner && \
     cd .. && \
     rm -rf netscanner && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -145,11 +144,10 @@ RUN git clone --recursive https://github.com/Chleba/netscanner.git && \
 RUN git clone --recursive https://github.com/imsnif/bandwhich.git && \
     cd bandwhich && \
     RUSTFLAGS="-C target-feature=+crt-static" cargo build --release --target aarch64-unknown-linux-gnu && \
-    cp target/release/bandwhich /usr/local/bin/bandwhich && \
+    cp target/aarch64-unknown-linux-gnu/release/bandwhich /usr/local/bin/bandwhich && \
     cd .. && \
     rm -rf bandwhich && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
 # 设置工作目录
 WORKDIR /workspace
 
