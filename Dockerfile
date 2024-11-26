@@ -65,6 +65,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libopencv-dev \
     libchromaprint-dev \
     libaom-dev \
+    shntool \
+    cuetools \
      && apt-get clean && rm -rf /var/lib/apt/lists/*
      
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
@@ -148,6 +150,7 @@ RUN git clone --recursive https://github.com/imsnif/bandwhich.git && \
     cd .. && \
     rm -rf bandwhich && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+RUN wget https://github.com/iyear/tdl/releases/download/v0.17.5/tdl_Linux_arm64.tar.gz && tar -zxf tdl_Linux_arm64.tar.gz && chmod a+x tdl && cp tdl 
 # 设置工作目录
 WORKDIR /workspace
 
