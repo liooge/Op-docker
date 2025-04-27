@@ -197,7 +197,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/openwrt:${{ env.DEVICE_PLATFORM }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/openwrt-m:${{ env.DEVICE_PLATFORM }}
 
       - name: Build & Push Normal Image (Extra Tag)
         if: env.DOCKER_EXTERA_TAG != null
@@ -208,5 +208,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/openwrt:${{ env.DEVICE_PLATFORM }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/openwrt:${{ env.DOCKER_EXTERA_TAG }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/openwrt-m:${{ env.DEVICE_PLATFORM }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/openwrt-m:${{ env.DOCKER_EXTERA_TAG }}
